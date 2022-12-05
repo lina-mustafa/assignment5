@@ -20,8 +20,10 @@ h1{
 }
 
 img{
-    height:1024px;
-    width: 1280px;
+    height:1000px;
+    width: 1273px;
+    margin-left: -50px;
+    opacity: 0.5;
 }
 
 </style>
