@@ -9,7 +9,7 @@ const error = ref(false);
 
 const login = () => {
   if (username.value === "tmdb" && password.value === "movies") {
-    router.push("/account");
+    router.push("/purchase");
   } else {
     error.value = true;
   }
