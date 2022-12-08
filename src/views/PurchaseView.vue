@@ -25,6 +25,7 @@ try {
 </script>
 
 <template>
+  <h1>Trending Movies:</h1>
    <div v-if="getMovies()" v-for="result in response" class="grid-container">
       <!--<p>{{result.original_title}}</p>-->
       <img v-bind:src="'http://image.tmdb.org/t/p/w500/' + result.poster_path">
@@ -32,16 +33,26 @@ try {
 </template>
 
 <style scoped>
-.grid-container {
-  display: grid;
-  grid-template-rows: auto auto auto;
-  padding: 10px;
-}
-.grid-item {
-  background-color: rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(0, 0, 0, 0.8);
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+
+.grid-container{
+  display: flex;
+  display: inline-grid;
+  align-content: space-evenly;
   padding: 20px;
-  font-size: 30px;
-  text-align: center;
+  gap: 10%;
+  margin-bottom: -260px;
 }
+
+img{
+  height:50%;
+}
+
+h1{
+  font-family: 'Bebas Neue', cursive;
+  font-size: 100px;
+  color: rgb(229, 9, 20);
+}
+
+
 </style>
