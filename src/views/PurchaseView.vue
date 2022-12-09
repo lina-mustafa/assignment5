@@ -1,9 +1,21 @@
 <script setup>
 import { ref } from "vue";
 import axios from "axios";
+import SiteModal from '../components/SiteModal.vue';
  
 const movies = ref ("");
 const response = ref(null);
+const showModal = ref(false);
+const selectedId = ref(0);
+
+const openModal = (id) => {
+  showModal.value = true;
+  selectedId.value = id;
+};
+
+const closeModal = () => {
+  showModal.value = false;
+};
 
 const getMovies = async () => {
     console.log(movies.value)
@@ -21,15 +33,16 @@ try {
   console.log(error);
 }
 };
- 
+await getMovies()
+
 </script>
 
 <template>
   <h1>Trending Movies:</h1>
    <div v-if="getMovies()" v-for="result in response" class="grid-container">
       <!--<p>{{result.original_title}}</p>-->
-      <img v-bind:src="'http://image.tmdb.org/t/p/w500/' + result.poster_path">
-    </div>
+      <img @click="openModal(result.id)" v-bind:src="'http://image.tmdb.org/t/p/w500/' + result.poster_path">    </div>
+    <SiteModal v-if="showModal" @toggleModal="closeModal()" :id="selectedId" />
 </template>
 
 <style scoped>
@@ -46,6 +59,7 @@ try {
 
 img{
   height:50%;
+  cursor: pointer;
 }
 
 h1{
@@ -53,6 +67,5 @@ h1{
   font-size: 100px;
   color: rgb(229, 9, 20);
 }
-
 
 </style>
