@@ -3,9 +3,8 @@ import { ref } from "vue";
 import axios from "axios";
 
 const props = defineProps(["id"]);
-const emits = defineEmits(["toggleModal"]);
-const Movies = ref ("");
 const response = ref(null);
+const emits = defineEmits(["toggleModal"]);
  
 const getData = async (url, params) => {
 try {
@@ -15,8 +14,8 @@ try {
 }
 };
  
-const getMovies = async () => {
-  response.value = (await getData(`https://api.themoviedb.org/3/movie/${Movies.value}`, {
+const getMovies = async (movies) => {
+  response.value = (await getData(`https://api.themoviedb.org/3/movie/${movies}`, {
     params: {
       api_key: "5ee6242bedc5de8c07acae66ee444042",
     }
@@ -26,11 +25,10 @@ const getMovies = async () => {
 
 <template>
   <Teleport to="body">
-    <div class="modal-outer-container" @click.self="emits('toggleModal')">
+    <div v-if= "getMovies(props.id)" class="modal-outer-container" @click.self="emits('toggleModal')">
       <div class="modal-inner-container">
         <button class="close-button" @click="emits('toggleModal')">X</button>
-        <h1>{{ props.id }}</h1>
-        <p>{{result.original_title}}</p>
+        <p>{{response.title}}</p>
       </div>
     </div>
   </Teleport>

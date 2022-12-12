@@ -39,10 +39,13 @@ await getMovies()
 
 <template>
   <h1>Trending Movies:</h1>
-   <div v-if="getMovies()" v-for="result in response" class="grid-container">
-      <!--<p>{{result.original_title}}</p>-->
-      <img @click="openModal(result.id)" v-bind:src="'http://image.tmdb.org/t/p/w500/' + result.poster_path">    </div>
-    <SiteModal v-if="showModal" @toggleModal="closeModal()" :id="selectedId" />
+  <template v-if="response">
+  <div v-if="getMovies()" v-for="result in response" class="grid-container">
+  <!--<p>{{result.original_title}}</p>-->
+  <img @click="openModal(result.id)" v-bind:src="'http://image.tmdb.org/t/p/w500/' + result.poster_path">
+  </div>
+  </template>
+  <SiteModal v-if="showModal" @toggleModal="closeModal()" :id="selectedId" ></SiteModal>
 </template>
 
 <style scoped>

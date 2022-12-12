@@ -6,9 +6,9 @@ import SiteFooter from '../components/SiteFooter.vue'
 </script>
 
 <template>
-<SiteHeader></SiteHeader>
-<SiteHero></SiteHero>
-<SiteFooter></SiteFooter>
+<SiteHeader/>
+<SiteHero/>
+<SiteFooter/>
 </template>
 
 <style scoped>
