@@ -4,7 +4,7 @@
 
 <template>
     <div class="footer">
-    <p>MOVIESGO &#169 2022<br/> Created by Lina Mustafa</p>
+    <p>MOVIESGO &#169 2022<br/> Explore trending movies with MOVIESGO <br/>Created by Lina Mustafa</p>
     </div>
 </template>
 
