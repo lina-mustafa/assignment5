@@ -18,9 +18,12 @@ const getMovies = async (movies) => {
   response.value = (await getData(`https://api.themoviedb.org/3/movie/${movies}`, {
     params: {
       api_key: "5ee6242bedc5de8c07acae66ee444042",
+      append_to_response: "videos",
     }
   })).data;
 }
+//const trailer = extraData.data.videos.results.filter((video) => video.type === "Trailer").at(0).key;
+
 </script>
 
 <template>
@@ -28,13 +31,20 @@ const getMovies = async (movies) => {
     <div v-if= "getMovies(props.id)" class="modal-outer-container" @click.self="emits('toggleModal')">
       <div class="modal-inner-container">
         <button class="close-button" @click="emits('toggleModal')">X</button>
-        <p>{{response.title}}</p>
+        <p1>{{response.title}}</p1>
+        <br/>
+        <p2>Release date: {{response.release_date}}</p2>
+        <br/>
+        <p3>{{response.overview}}</p3>
+        <br/>
+        <p4><a href="https://www.youtube.com/embed/${trailer}" target="_blank">Click here for the movie trailer!</a></p4>
       </div>
     </div>
   </Teleport>
 </template>
 
 <style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Inconsolata&display=swap");
 .modal-outer-container {
   position: fixed;
   top: 0;
@@ -66,4 +76,35 @@ const getMovies = async (movies) => {
   font-size: 1.25rem;
   color: white;
 }
+
+p1 {
+  font-size: 50px;
+  position: relative; top:30px;
+  font-family: 'Inconsolata', monospace;
+}
+
+p2 {
+  font-size: 20px;
+  position: relative; top:70px;
+  font-family: 'Inconsolata', monospace;
+}
+
+p3 {
+  font-size: 20px;
+  position: relative; top:90px;
+  font-family: 'Inconsolata', monospace;
+}
+
+p4 {
+  font-size: 20px;
+  position: relative; top: 110px;
+  font-family: 'Inconsolata', monospace;
+}
+a{
+  color: white;
+}
+a:hover{
+  color: rgb(229, 9, 20);
+}
+
 </style>
