@@ -5,15 +5,15 @@ import axios from "axios";
 const props = defineProps(["id"]);
 const response = ref(null);
 const emits = defineEmits(["toggleModal"]);
- 
+
 const getData = async (url, params) => {
-try {
-  return await axios.get(url, params);
-} catch (error) {
-  console.log(error);
-}
+  try {
+    return await axios.get(url, params);
+  } catch (error) {
+    console.log(error);
+  }
 };
- 
+
 const getMovies = async (movies) => {
   response.value = (await getData(`https://api.themoviedb.org/3/movie/${props.id}`, {
     params: {
@@ -21,6 +21,10 @@ const getMovies = async (movies) => {
       append_to_response: "videos",
     }
   })).data;
+
+
+  getMovies(props.id)
+  console.log(response.videos.results[0].key);
 }
 //const trailer = extraData.data.videos.results.filter((video) => video.type === "Trailer").at(0).key;
 
@@ -28,19 +32,20 @@ const getMovies = async (movies) => {
 
 <template>
   <Teleport to="body">
-    <div v-if= "getMovies(props.id)" class="modal-outer-container" @click.self="emits('toggleModal')">
+    <div class="modal-outer-container" @click.self="emits('toggleModal')">
       <div class="modal-inner-container">
         <button class="close-button" @click="emits('toggleModal')">X</button>
         <div class="description">
-        <p1>{{response.title}}</p1>
-        <br/>
-        <p2>Release date: {{response.release_date}}</p2>
-        <br/>
-        <p3>{{response.overview}}</p3>
-        <br/>
-        <p4><a href="https://www.youtube.com/embed/${data.videos.results[0].key}" target="_blank">Click here for the movie trailer!</a></p4>
-        <!--<iframe class="video" :src="`https://www.youtube.com/embed/${data.videos.results[0].key}?autoplay=1`" frameborder="0"></iframe>-->
-      </div>
+          <p1>{{ response.title }}</p1>
+          <br />
+          <p2>Release date: {{ response.release_date }}</p2>
+          <br />
+          <p3>{{ response.overview }}</p3>
+          <br />
+          <p4><a :href="`https://www.youtube.com/embed/${response.videos.results[0].key}`" target="_blank">Click here
+              for the movie trailer!</a></p4>
+          <!--<iframe class="video" :src="`https://www.youtube.com/embed/${data.videos.results[0].key}?autoplay=1`" frameborder="0"></iframe>-->
+        </div>
       </div>
     </div>
   </Teleport>
@@ -48,6 +53,7 @@ const getMovies = async (movies) => {
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Inconsolata&display=swap");
+
 .modal-outer-container {
   position: fixed;
   top: 0;
@@ -82,32 +88,37 @@ const getMovies = async (movies) => {
 
 p1 {
   font-size: 50px;
-  position: relative; top:30px;
+  position: relative;
+  top: 30px;
   font-family: 'Inconsolata', monospace;
 }
 
 p2 {
   font-size: 20px;
-  position: relative; top:70px;
+  position: relative;
+  top: 70px;
   font-family: 'Inconsolata', monospace;
 }
 
 p3 {
   font-size: 20px;
-  position: relative; top:90px;
+  position: relative;
+  top: 90px;
   font-family: 'Inconsolata', monospace;
 }
 
 p4 {
   font-size: 20px;
-  position: relative; top: 110px;
+  position: relative;
+  top: 110px;
   font-family: 'Inconsolata', monospace;
 }
-a{
+
+a {
   color: white;
 }
-a:hover{
+
+a:hover {
   color: rgb(229, 9, 20);
 }
-
 </style>
