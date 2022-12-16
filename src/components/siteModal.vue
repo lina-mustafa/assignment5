@@ -15,7 +15,7 @@ try {
 };
  
 const getMovies = async (movies) => {
-  response.value = (await getData(`https://api.themoviedb.org/3/movie/${movies}`, {
+  response.value = (await getData(`https://api.themoviedb.org/3/movie/${props.id}`, {
     params: {
       api_key: "5ee6242bedc5de8c07acae66ee444042",
       append_to_response: "videos",
@@ -31,13 +31,16 @@ const getMovies = async (movies) => {
     <div v-if= "getMovies(props.id)" class="modal-outer-container" @click.self="emits('toggleModal')">
       <div class="modal-inner-container">
         <button class="close-button" @click="emits('toggleModal')">X</button>
+        <div class="description">
         <p1>{{response.title}}</p1>
         <br/>
         <p2>Release date: {{response.release_date}}</p2>
         <br/>
         <p3>{{response.overview}}</p3>
         <br/>
-        <p4><a href="https://www.youtube.com/embed/${trailer}" target="_blank">Click here for the movie trailer!</a></p4>
+        <p4><a href="https://www.youtube.com/embed/${data.videos.results[0].key}" target="_blank">Click here for the movie trailer!</a></p4>
+        <!--<iframe class="video" :src="`https://www.youtube.com/embed/${data.videos.results[0].key}?autoplay=1`" frameborder="0"></iframe>-->
+      </div>
       </div>
     </div>
   </Teleport>

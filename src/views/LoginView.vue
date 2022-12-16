@@ -18,7 +18,7 @@ const login = () => {
 
 <template>
   <div class="home-container">
-    <h1>Registration:</h1>
+    <h1>Login:</h1>
     <form @submit.prevent="login()">
       <input type="text" v-model="username" placeholder="Username" />
       <br/>
