@@ -5,11 +5,12 @@
 
 <template>
     <div>
-<Suspense>
-    <RouterView/>
-</Suspense>
+        <Suspense>
+            <RouterView />
+        </Suspense>
     </div>
 </template>
 
 <style scoped>
+
 </style>

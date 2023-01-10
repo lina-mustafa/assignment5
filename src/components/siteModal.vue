@@ -21,12 +21,10 @@ const getMovies = async (movies) => {
       append_to_response: "videos",
     }
   })).data;
-
-
-  getMovies(props.id)
-  console.log(response.videos.results[0].key);
 }
-//const trailer = extraData.data.videos.results.filter((video) => video.type === "Trailer").at(0).key;
+
+await getMovies(props.id)
+console.log(response.value);
 
 </script>
 
@@ -36,7 +34,7 @@ const getMovies = async (movies) => {
       <div class="modal-inner-container">
         <button class="close-button" @click="emits('toggleModal')">X</button>
         <div class="description">
-          <p1>{{ response.title }}</p1>
+          <p1>{{ response.original_title }}</p1>
           <br />
           <p2>Release date: {{ response.release_date }}</p2>
           <br />
@@ -44,7 +42,6 @@ const getMovies = async (movies) => {
           <br />
           <p4><a :href="`https://www.youtube.com/embed/${response.videos.results[0].key}`" target="_blank">Click here
               for the movie trailer!</a></p4>
-          <!--<iframe class="video" :src="`https://www.youtube.com/embed/${data.videos.results[0].key}?autoplay=1`" frameborder="0"></iframe>-->
         </div>
       </div>
     </div>
